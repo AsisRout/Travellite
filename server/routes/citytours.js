@@ -9,7 +9,7 @@ Router.get('/', (req,res,next) =>{
 
     const city = req.query.city;
 
-    var sql = "call get_hotel_from_city('" + city + "');";
+    var sql = "call get_tourist_from_city('" + city + "');";
     console.log(sql);
 
     db.query(sql , function(err,result) {

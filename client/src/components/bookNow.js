@@ -27,7 +27,7 @@ export class BookNow extends React.Component {
     rooms:e.target.rooms.value,
     guest:e.target.guest.value})
     console.log(Difference_In_Days);
-    await this.props.confirm((this.props.hotelResp.Price)*(this.state.rooms)*(Difference_In_Days),
+    await this.props.confirm((this.props.packageResp.Price)*(this.state.rooms)*(Difference_In_Days),
     this.state.rooms,this.state.checkin,this.state.checkout);
     this.setState({submitted:true});
 
@@ -62,9 +62,9 @@ export class BookNow extends React.Component {
             <Navbar dealLogout={this.props.dealLogout}/>
             <div className="container">
             <form onSubmit={this.handleContinue}>
-               <h4>{this.props.hotelResp.name}</h4>
-               <h6>Near {this.props.hotelResp.address}, {this.props.hotelResp.city}</h6>
-               <p>Ratings : {this.props.hotelResp.Rating}</p>
+               <h4>{this.props.packageResp.name}</h4>
+               <h6>Near {this.props.packageResp.address}, {this.props.packageResp.city}</h6>
+               <p>Ratings : {this.props.packageResp.Rating}</p>
                <div className="row">
                <div className="col-25">
                <label for="checkin" >Checkin</label>
@@ -94,7 +94,7 @@ export class BookNow extends React.Component {
                 <label for="rooms">Rooms Count</label>
               </div>
               <div className="col-75">
-                <input type="number" name="rooms" min="1" max={this.props.hotelResp.roomsAvi} required />
+                <input type="number" name="rooms" min="1" max={this.props.packageResp.roomsAvi} required />
               </div>
             </div>
             <input type="submit" value="Click here"/> to continue booking...

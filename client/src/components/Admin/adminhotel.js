@@ -9,11 +9,16 @@ export class Adminhotel extends React.Component {
         this.state = {
             hotels : [],
         }
-
+        this.loadHotels = this.loadHotels.bind(this);
+        this.deleteHotels = this.deleteHotels.bind(this);
     }
     componentDidMount() {
+      this.loadHotels();
+    }
 
-        fetch(`http://localhost:3001/admin/hotels`, {
+    loadHotels(){
+
+        fetch(`http://localhost:3001/admin/hotels/view`, {
             method:"GET",
             headers: {
                 "Content-Type" : "application/json"
@@ -34,13 +39,38 @@ export class Adminhotel extends React.Component {
           })
         
     }
+    deleteHotels(hotelname) {
+
+      fetch(`http://localhost:3001/admin/hotels/delete?hotelname=${encodeURIComponent(hotelname)}`,{
+
+        method:"POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+      })
+    .then (res => {
+      console.log (res);
+      if (res.ok) return res.json ();
+      else throw new Error ();
+    })
+    .then (res => {
+      alert (`Hotel deleted Successfully `);
+      this.loadHotels();
+    })
+    .catch (error => {
+      console.error (`Error adding user: ${error}`);
+    });
+
+    }
 
         render() {
             return (
                 <div>
-                    <Navbar />
+                    <Navbar dealLogout={this.props.dealLogout} />
                     <br />
                     <br />
+                    <br />
+                    
                 <div className="py-4">
                 <table class="table border shadow">
                  <thead class="thead-dark">
@@ -64,17 +94,18 @@ export class Adminhotel extends React.Component {
                 <td>{hotel.address}</td>
                 <td>{hotel.noOfStar}</td>
                 <td>
-                  <Link class="btn btn-primary mr-2" to={`/users/${hotel.id}`}>
+                  <Link class="btn btn-primary mr-2" to={`/admin/hotels/view/${hotel.name}/${hotel.dailyCost}/${hotel.noOfStar}/${hotel.address}/${hotel.roomAvi}`}>
                     View
                   </Link>
                   <Link
                     class="btn btn-outline-primary mr-2"
-                    to={`/users/edit/${hotel.id}`}
+                    to={`hotels/edit/${hotel.name}`}
                   >
                     Edit
                   </Link>
                   <Link
                     class="btn btn-danger"
+                    onClick={() => this.deleteHotels(hotel.name)}
                   >
                     Delete
                   </Link>

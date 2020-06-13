@@ -5,6 +5,9 @@ import {Navbar} from './navbar';
 import {Redirect } from 'react-router-dom';
 import "../styles/confirmBooking.css";
 
+
+const randomInt = require('random-int');
+
 const path = require('path');
 require('dotenv').config();
 
@@ -16,18 +19,21 @@ export class ConfirmHotel extends Component{
     constructor() {
         super();
         this.state={
-            redirectToThankyou:false
+            redirectToThankyou:false,
         }
         this.handleToken=this.handleToken.bind(this);
+    
     }
+   
     async handleToken(token)
     {
         let obj={
-            hotelid:this.props.hotelResp.id,
+            id: randomInt(100000),
+            username: this.props.user,
+            hotelname:this.props.packageResp.name,
             rooms:this.props.rooms,
             checkin:this.props.checkin,
             checkout:this.props.checkout,
-            paymentid : 1,
         }
 
         const response=await fetch("http://localhost:3001/bookings/add",{
@@ -90,19 +96,19 @@ export class ConfirmHotel extends Component{
             <label align="center">Booking Details</label>
             </div>
             <div className="insideContainer">
-            <h4>{this.props.hotelResp.name}</h4>
-            <h5>Near {this.props.hotelResp.address}, {this.props.hotelResp.city}</h5>
-            <p>Ratings : {this.props.hotelResp.Rating}</p>
+            <h4>{this.props.packageResp.name}</h4>
+            <h5>Near {this.props.packageResp.address}, {this.props.packageResp.cityname}</h5>
+            <p>Ratings : {this.props.packageResp.Rating}</p>
             <p>Rooms Booked : {this.props.rooms}</p>
             <p>Dated : {this.props.checkin} to {this.props.checkout}</p>
             <h4 style={{color:"red"}}>Total Amount : {this.props.prc} INR</h4>
             <div style={{textAlign:"center"}} >
-            <StripeCheckout stripeKey={process.env.REACT_APP_APIKEY} token={this.handleToken} 
+            <StripeCheckout stripeKey='pk_test_zF4GJwVfckTpEQQO0fBqChkK00UpAlA4Lv' token={this.handleToken} 
              amount={this.props.prc*100}
              currency='INR' 
              name='TRAVELS'
              description= 'Make Your Payment'
-             label= 'Make Payment' />
+        label= 'Make Payment' /> 
             </div>
             </div>
             
@@ -113,7 +119,7 @@ export class ConfirmHotel extends Component{
     }
 }
 
-
+//process.env.REACT_APP_APIKEY
 
 
 

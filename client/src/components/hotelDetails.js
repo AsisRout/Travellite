@@ -15,11 +15,11 @@ export class HotelDetails extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.hotelResp.id);
+    console.log(this.props.packageResp.id);
     
     /*description*/
   
-    fetch(`http://localhost:3001/hoteldetails/desc?id=${encodeURIComponent(this.props.hotelResp.id)}`,{
+    fetch(`http://localhost:3001/hoteldetails/desc?id=${encodeURIComponent(this.props.packageResp.id)}`,{
       method:"GET",
       headers: {
           "Content-Type" : "application/json"
@@ -38,7 +38,7 @@ export class HotelDetails extends React.Component {
 
 
     /*facilities*/
-    fetch(`http://localhost:3001/hoteldetails/amenities?id=${encodeURIComponent(this.props.hotelResp.id)}`, {
+    fetch(`http://localhost:3001/hoteldetails/amenities?id=${encodeURIComponent(this.props.packageResp.id)}`, {
       method:"GET",
       headers: {
           "Content-Type" : "application/json"
@@ -57,7 +57,7 @@ export class HotelDetails extends React.Component {
     });
 
     /*Reviews*/
-    fetch(`http://localhost:3001/hoteldetails/reviews?name=${encodeURIComponent(this.props.hotelResp.name)}`, {
+    fetch(`http://localhost:3001/hoteldetails/reviews?name=${encodeURIComponent(this.props.packageResp.name)}`, {
       method:"GET",
       headers: {
           "Content-Type" : "application/json"
@@ -113,7 +113,7 @@ export class HotelDetails extends React.Component {
 <div id="h_d">
 <div className="leftDiv">
     <h2>About Hotel </h2>
-    <img src={this.props.hotelResp.img_url} alt="Hotelimg"/>
+    <img src={this.props.packageResp.img_url} alt="Hotelimg"/>
     <p>{this.state.descrip}</p>
     <h2>Amenties</h2>
         {this.state.facilities.map((fac,id)=>(
@@ -126,7 +126,7 @@ export class HotelDetails extends React.Component {
         ))}
 </div>
 <div className="rightDiv"> 
-    <BookNow hotelResp={this.props.hotelResp} confirm={this.props.confirm} />
+    <BookNow packageResp={this.props.packageResp} confirm={this.props.confirm} />
 </div>
 </div>
 </div>

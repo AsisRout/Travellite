@@ -17,12 +17,26 @@ import { MyBooking } from './components/myBookings';
 import { Homepage } from './components/homepage';
 import { Admin } from './components/Admin/admin' ;
 import { Adminhotel } from './components/Admin/adminhotel' ;
+import { Admintour } from './components/Admin/admintours';
+import { EditUser } from './components/Admin/Users/EditUser';
+import { ViewUser } from './components/Admin/Users/ViewUser';
+import { AddUser } from './components/Admin/Users/AddUser';
+import { EditHotel } from './components/Admin/Hotels/EditHotel';
+import { Tours } from './components/Tour/tours';
+import { ViewHotel } from './components/Admin/Hotels/Viewhotel';
+import { CityTours } from './components/Tour/tourdetails';
+import {Booking} from './components/Tour/booking';
+import { EditTour} from './components/Admin/Tours/EditTour';
+import { ViewTour} from './components/Admin/Tours/ViewTour';
 require('dotenv').config();
 
 class App extends React.Component {
   constructor() {
     super();
     this.state={
+      tourResp:{},
+      user:"",
+      isAuthAdmin:false,
       isAuth:false,
       response:[] ,
       cityResponse:JSON.parse(localStorage.getItem('cityResponse')) || [] ,
@@ -32,8 +46,8 @@ class App extends React.Component {
       checkin:"",
       checkout:"",
       rooms:1 ,
-      hotelName:"",
-      hotelResp:{},
+      packageName:"",
+      packageResp:{},
       overallPrice:"",
       overallRooms:""
     }       
@@ -42,41 +56,19 @@ class App extends React.Component {
     this.orderFun=this.orderFun.bind(this);
     this.getSecondResponse=this.getSecondResponse.bind(this);
     this.dealSubmit=this.dealSubmit.bind(this);
+    this.dealSubmitAdmin=this.dealSubmitAdmin.bind(this);
     this.dealLogout=this.dealLogout.bind(this);
     this.handlePriceChange=this.handlePriceChange.bind(this);
     this.handleReviewChange=this.handleReviewChange.bind(this);
-    this.setHotelName=this.setHotelName.bind(this);
-    this.setHotelResp=this.setHotelResp.bind(this);
+    this.setpackageName=this.setpackageName.bind(this);
+    this.setpackageResp=this.setpackageResp.bind(this);
     this.confirm=this.confirm.bind(this);
+    this.setusername=this.setusername.bind(this);
+    this.setcityResponse=this.setcityResponse.bind(this);
+    this.setCity = this.setCity.bind(this);
   }
   
-  componentDidMount() {
-    fetch("http://localhost:3001/users/checkUser",{
-        method:"GET",
-        headers: {
-            "Content-Type" : "application/json"
-        }
-        })
-        .then(res => {
-          console.log(res);
-            if (res.ok) {
-              this.setState({isAuth:true})
-            }
-            else {
-              if(this.state.isAuth===true)
-              {
-                this.setState({isAuth:false})
-              }
-            }
-            return;
-        })
-        .catch(error => {
-            alert('not auth')
-            this.setState({redirectToSignup:true});
-            console.error(`Error adding user: ${error}`)
-        })
-  }
-
+  
   async getResponse() 
   {
     let today = new Date();
@@ -168,30 +160,16 @@ class App extends React.Component {
     await this.getSecondResponse(city,ad,dd,room);
     this.setState({city:city , checkin:ad , checkout:dd , rooms:room})  
   }
-
+    dealSubmitAdmin(){
+      this.setState({isAuthAdmin:true}); 
+    }
     dealSubmit() {
       this.setState({isAuth:true}); 
     }
 
     dealLogout() {
-      fetch("http://localhost:3001/users/logout",{
-        method:"GET",
-        headers: {
-            "Content-Type" : "application/json"
-        }
-        })
-        .then(res => {
-            if (res.ok) {
-              this.setState({isAuth:false});
-            }
-            return;
-        })
-        .catch(error => {
-            alert('error')
-            //this.setState({redirectToSignup:true});
-            //console.error(`Error adding user: ${error}`)
-        })
-      
+            this.setState({isAuth:false});
+            this.setState({isAuthAdmin:false});
     }
 
     handlePriceChange(price){
@@ -223,14 +201,24 @@ class App extends React.Component {
         priceArr=priceArr.filter(res=>(res.rating_message===review))
       this.setState({cityResponse:priceArr});
     }
-    
-    setHotelName(hN){
-      this.setState({hotelName:hN})
+    setusername(username){
+      this.setState({user:username})
     }
 
-    async setHotelResp(resp){
-      await this.setState({hotelResp:resp});
-      await this.setState({hotelName: resp.name });
+    setpackageName(hN){
+      this.setState({packageName:hN})
+    }
+
+    setcityResponse(arr){
+      this.setState({cityResponse:arr})
+    }
+    setCity(c){
+      this.setState({city:c})
+    }
+
+    async setpackageResp(resp){
+      await this.setState({packageResp:resp});
+      await this.setState({packageName: resp.name });
       //console.log(this.state.hotelResp.hotel_name);
     }
 
@@ -251,29 +239,51 @@ class App extends React.Component {
            
             <Route exact path="/" render={ ()=><Homepage/>}></Route>;
             
-            <Route exact path="/main" render={ ()=> this.state.isAuth ? <Main setHotelResp={this.setHotelResp} getResponse={this.getResponse} response={this.state.response} getResponse2={this.getResponse2} cityResponse={this.state.cityResponse}  getSecondResponse={this.getSecondResponse} dealLogout={this.dealLogout} /> : <Redirect to="/login"/>} ></Route>
+            <Route exact path="/main" render={ ()=> this.state.isAuth ? <Main setpackageResp={this.setpackageResp} getResponse={this.getResponse} response={this.state.response} getResponse2={this.getResponse2} cityResponse={this.state.cityResponse}  getSecondResponse={this.getSecondResponse} dealLogout={this.dealLogout} /> : <Redirect to="/login"/>} ></Route>
 
             <Route exact path="/about" render = { ()=> ( <Hotels dealLogout={this.dealLogout} getResponse2={this.getResponse2} cityResponse={this.cityResponse} /> )}></Route>
             
-            <Route exact path="/cityhotels" render = { ()=> this.state.isAuth? (<CityHotels city={this.state.city} setHotelResp={this.setHotelResp} setHotel={this.setHotelName} cityResponse={this.state.cityResponse} orderFun={this.orderFun} loading={this.state.loading} handlePriceChange={this.handlePriceChange} handleReviewChange={this.handleReviewChange} dealLogout={this.dealLogout} />):<Redirect to="/main"/>}></Route>
+            <Route exact path="/cityhotels" render = { ()=> this.state.isAuth? (<CityHotels city={this.state.city} setpackageResp={this.setpackageResp} setpackage={this.setpackageName} cityResponse={this.state.cityResponse} orderFun={this.orderFun} loading={this.state.loading} handlePriceChange={this.handlePriceChange} handleReviewChange={this.handleReviewChange} dealLogout={this.dealLogout} />):<Redirect to="/main"/>}></Route>
             
-            <Route exact path="/hoteldetails" render = { ()=> this.state.isAuth? ( <HotelDetails city={this.city} confirm={this.confirm} hotelResp={this.state.hotelResp} dealLogout={this.dealLogout} />):<Redirect to="/main"/>}></Route>
+            <Route exact path="/hoteldetails" render = { ()=> this.state.isAuth? ( <HotelDetails city={this.city} confirm={this.confirm} packageResp={this.state.packageResp} dealLogout={this.dealLogout} />):<Redirect to="/main"/>}></Route>
             
             <Route exact path="/signup" render={()=> this.state.isAuth?<Redirect to="/main"/>:<Signup/>}></Route>
             
-            <Route exact path="/login" render = { ()=> this.state.isAuth ? <Redirect to="/main"/>: <Login dealSubmit={this.dealSubmit} /> }></Route>
+            <Route exact path="/login" render = { ()=> this.state.isAuthAdmin ? <Redirect to="/admin"/>: (this.state.isAuth ? <Redirect to="/main"/>: <Login user={this.state.user} setusername={this.setusername} dealSubmit={this.dealSubmit} dealSubmitAdmin={this.dealSubmitAdmin} />) }></Route>
             
-            <Route exact path="/booknow" render = { ()=> this.state.isAuth? ( <BookNow confirm={this.confirm} hotelResp={this.state.hotelResp} checkin={this.state.checkin} checkout={this.state.checkout} rooms={this.state.rooms} hotelName={this.state.hotelName} dealLogout={this.dealLogout} />):<Redirect to="/main"/>}></Route>
+            <Route exact path="/booknow" render = { ()=> this.state.isAuth? ( <BookNow confirm={this.confirm} packageResp={this.state.packageResp} checkin={this.state.checkin} checkout={this.state.checkout} rooms={this.state.rooms} packageName={this.state.packageName} dealLogout={this.dealLogout} />):<Redirect to="/main"/>}></Route>
             
-            <Route exact path="/confirmhotel" render = { ()=> this.state.isAuth? ( <ConfirmHotel  hotelResp={this.state.hotelResp} prc= {this.state.overallPrice} rooms = {this.state.overallRooms} dealLogout={this.dealLogout} checkin={this.state.checkin} checkout={this.state.checkout}/> ):<Redirect to="/main"/>} />
+            <Route exact path="/confirmhotel" render = { ()=> this.state.isAuth? ( <ConfirmHotel user={this.state.user}  packageResp={this.state.packageResp} prc= {this.state.overallPrice} rooms = {this.state.overallRooms} dealLogout={this.dealLogout} checkin={this.state.checkin} checkout={this.state.checkout}/> ):<Redirect to="/main"/>} />
             
             <Route exact path="/thankyou" render={()=>(<Thankyou dealLogout={this.dealLogout}/>)}></Route>
 
-            <Route exact path="/mybookings" render={()=>(<MyBooking dealLogout={this.dealLogout} />)}></Route>
+            <Route exact path="/mybookings" render={()=>(<MyBooking username={this.state.user} dealLogout={this.dealLogout} />)}></Route>
             
-            <Route exact path="/admin" render={()=>(<Admin />)}></Route>
+            <Route exact path="/admin" render={()=>(this.state.isAuthAdmin ?<Admin dealLogout={this.dealLogout} />: <Redirect to="/login"/>)}></Route>
 
-            <Route exact path="/admin/hotel" render={()=>(<Adminhotel />)}></Route>
+            <Route exact path="/admin/hotel" render={()=>(<Adminhotel dealLogout={this.dealLogout}/>)}></Route>
+
+            <Route exact path="/admin/users/edit/:username/:name/:email/:password" component={EditUser} ></Route>
+
+            <Route exact path="/admin/users/view/:username/:name/:email/:password" component={ViewUser}></Route>
+           
+            <Route exact path="/admin/users/add" render={()=>(<AddUser dealLogout={this.dealLogout}/>)}></Route>
+
+            <Route exact path="/tours" render={()=>(<Tours dealLogout={this.dealLogout} setCity={this.setCity} setcityResponse={this.setcityResponse}/>)}></Route>
+
+            <Route exact path="/admin/hotels/edit/:hotelname" component={EditHotel} ></Route>
+
+            <Route exact path="/admin/hotels/view/:hotelname/:dailyCost/:noOfStar/:address/:roomAvi" component={ViewHotel}></Route>
+            
+            <Route exact path="/citytours" render={()=>(<CityTours cityResponse={this.state.cityResponse} city={this.state.city} setpackageResp={this.setpackageResp}/> )}></Route>
+            
+            <Route exact path="/booktour" render={()=>(<Booking user={this.state.user} packageResp={this.state.packageResp} city={this.state.city}/> ) }></Route>
+            
+            <Route exact path="/admin/tour" render={()=>(<Admintour dealLogout={this.dealLogout}/>)}></Route>
+
+            <Route exact path="/admin/tours/edit/:tourname" component={EditTour} ></Route>
+
+            <Route exact path="/admin/tours/view/:tourname/:dailyCost/:aviTour/:bookedTour" component={ViewTour}></Route>
 
             <Route render={()=>(<NotFound/>)}></Route>
           

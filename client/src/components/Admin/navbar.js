@@ -4,6 +4,8 @@ import '../../styles/headFoot.css'
 import { Link } from 'react-router-dom';
 export class Navbar extends React.Component {
     render() {
+
+        console.log(this.props);
         return(
             <nav className="navbar navbar-expand-lg navbar-light fixed-top">
               <Link className="navbar-brand" to="/admin">Trips And Travels</Link>
@@ -20,12 +22,13 @@ export class Navbar extends React.Component {
                   <Link className="nav-link" to="/admin/hotel" >HOTELS </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/admin" >TOUR BOOK</Link>
+                  <Link className="nav-link" to="/admin/tour" >TOUR BOOK</Link>
                 </li>
               </ul>
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a className="navbar-brand" onClick={this.props.dealLogout} id="logout-nav">LOGOUT </a>
+                <Link className="navbar-brand" to="/login" onClick={this.props.dealLogout} >LOGOUT</Link>
+                
                 </li>
               </ul>
             </div>

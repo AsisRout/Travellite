@@ -21,7 +21,7 @@ constructor() {
     this.orderSelection=this.orderSelection.bind(this);
     this.priceChange=this.priceChange.bind(this);
     this.reviewsChange=this.reviewsChange.bind(this);
-    this.setHotel=this.setHotel.bind(this);
+    this.setpackage=this.setpackage.bind(this);
 }
 orderSelection(event)
 {
@@ -42,9 +42,9 @@ reviewsChange(e)
     this.props.handleReviewChange(e.target.value);
 }
 
-setHotel(res)
+setpackage(res)
 {
-    this.props.setHotelResp(res);
+    this.props.setpackageResp(res);
     //console.log(res);
 }
 render() {
@@ -66,7 +66,7 @@ render() {
                 <input type="radio" value="10000" onChange={this.priceChange} checked={this.state.priceRadio==="10000"} /> above 8000 INR <br/>
                 </div>
             </form><br/>
-            <form>
+          {/*  <form>
                 <h4>Ratings Reviews</h4>
                 <div>
                 <input type="radio" value="Good" onChange={this.reviewsChange} checked={this.state.reviewRadio==="Good"} /> Good <br/>
@@ -74,7 +74,7 @@ render() {
                 <input type="radio" value="Excellent" onChange={this.reviewsChange} checked={this.state.reviewRadio==="Excellent"}/> Excellent <br/>
                 <input type="radio" value="All" onChange={this.reviewsChange} checked={this.state.reviewRadio==="All"}/> All <br/>
                 </div>
-            </form><br/>
+            </form><br/>*/}
             {/*<form>
             <h4>Facilities</h4>
                 {this.state.arr.map((item,index)=>
@@ -91,7 +91,6 @@ render() {
                 </div>
                 <div className="column leftdropdown">
                 Sort By:<select id="lang" onChange={this.orderSelection} >
-                            <option value="popularity">Popularity</option>
                             <option value="name">Hotel Name</option>
                             <option value="ratings">Ratings</option>
                             <option value="price_ascending">Price(Low to High)</option>
@@ -137,10 +136,10 @@ render() {
                         <h5 style={{color:"red" }}>Price : {res.Price} INR </h5>
                         <div className="main_row">
                             <div style={{width:"50%" , float:"left"}}> 
-                                <button style={{backgroundColor:"white" , color:"white" ,border: "1 px blue" , fontSize:"20px" }}><Link to="/hoteldetails" style={{color:"blue" , textDecoration:"none"}} onClick={()=>this.setHotel(res)}>View Details</Link></button>
+                                <button style={{backgroundColor:"white" , color:"white" ,border: "1 px blue" , fontSize:"20px" }}><Link to="/hoteldetails" style={{color:"blue" , textDecoration:"none"}} onClick={()=>this.setpackage(res)}>View Details</Link></button>
                             </div>
                             <div style={{width:"50%" , float:"left"}}> 
-                                <button style={{backgroundColor:"green" , color:"white" ,border: "1 px green" , fontSize:"20px" }}><Link to="/booknow" style={{color:"white" , textDecoration:"none"}} onClick={()=>this.setHotel(res)}>Book Now</Link></button>
+                                <button style={{backgroundColor:"green" , color:"white" ,border: "1 px green" , fontSize:"20px" }}><Link to="/booknow" style={{color:"white" , textDecoration:"none"}} onClick={()=>this.setpackage(res)}>Book Now</Link></button>
                             </div>
                         </div>
                     </div>

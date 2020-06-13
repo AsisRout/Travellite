@@ -47,20 +47,30 @@
       position: absolute;
       display: inline;
   }
+  .about1 {
+    margin-top: 0px;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdcEVOBlugdWO84CrkEQTNOg1pPmEfYkChvJlofMGLcvEBNz0R&usqp=CAU");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: inline;
+  }
 
-  .about .inAbout {
+  .inAbout {
       margin-top: 10%;
       padding: 0 60px 10px 60px;
       color: black;
       text-align: center;
   }
 
-  .about .inAbout h1 {
+  .inAbout h1 {
       font-size: -webkit-xxx-large;
       color: #358f9e;
   }
 
-  .about .inAbout p {
+   .inAbout p {
       font-size: larger;
       color: #dc3545;
       font-weight: 500;
@@ -74,7 +84,7 @@
   }
 
   @media only screen and (max-width: 1130px) {
-      .about .inAbout {
+      .inAbout {
           margin-top: 20%;
       }
 
@@ -86,7 +96,7 @@
   }
 
   @media only screen and (max-width: 700px) {
-      .about .inAbout h1 {
+       .inAbout h1 {
           font-size: xx-large;
       }
   }

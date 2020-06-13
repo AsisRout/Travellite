@@ -17,6 +17,11 @@ var mysqlRouter = require('./config');
 var usersRouter = require('./routes/users.js');
 var hoteldetailsRouter = require('./routes/hoteldetails');
 var adminRouter = require('./routes/admin');
+var adminhotelRouter = require('./routes/adminhotel');
+var bookingRouter = require('./routes/bookings');
+var tourRouter = require('./routes/citytours');
+var adminTourRouter = require('./routes/admintour');
+
 global.db=mysqlRouter;
 
 
@@ -49,13 +54,20 @@ app.use ('/cityhotels',cityhotelsRouter);
 app.use ('/users',usersRouter);
 app.use ('/hoteldetails',hoteldetailsRouter);
 app.use ('/admin',adminRouter);
+app.use ('/adminhotel',adminhotelRouter);
+app.use ('/bookings',bookingRouter);
+app.use ('/citytours',tourRouter);
+app.use ('/admintour',adminTourRouter);
+
 app.use(session({
   key: "hotel",
   secret: "hotelsecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
-      maxAge: 6*60*1000
+      maxAge: 6*60*1000,
+      
+
   }
 }))
 app.use(express.static('public'));
