@@ -103,7 +103,7 @@ export class ConfirmHotel extends Component{
             <p>Dated : {this.props.checkin} to {this.props.checkout}</p>
             <h4 style={{color:"red"}}>Total Amount : {this.props.prc} INR</h4>
             <div style={{textAlign:"center"}} >
-            <StripeCheckout stripeKey='pk_test_zF4GJwVfckTpEQQO0fBqChkK00UpAlA4Lv' token={this.handleToken} 
+            <StripeCheckout stripeKey='process.env.REACT_APP_APIKEY' token={this.handleToken} 
              amount={this.props.prc*100}
              currency='INR' 
              name='TRAVELS'
