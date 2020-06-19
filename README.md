@@ -9,10 +9,8 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
   <li>Book the ticket</li>
   <li>Use the tariff plans if given(discount)(<i>Still to be implemented</i>)</li>
   <li>Fill and edit personal details</li>
-  <li>Hotel booking</li>
-  <li>Nearby ATM search</li>
+  <li>Hotel and tour booking</li>
   <li>Receive invoice(<i>Still to be implemented</i>)</li>
-  <li>Train ticket booking and searching of train</li>
   <li>Change of password</li>
 </ul>
 
