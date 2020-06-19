@@ -14,17 +14,46 @@ export class Booking extends React.Component {
   constructor(){
     super();
     this.state ={
+      
       traveldate:"",
       totalmembers:"",
+      email:"",
+      message:"",
       submitted:false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleToken=this.handleToken.bind(this);
+    this.handlemail = this.handlemail.bind(this);
   }
    handleChange(e){
         this.setState({ [e.target.name]: e.target.value})
   }
+ async handlemail(username,emailid,msg){
 
+    let obj={
+      name: username,
+      email : emailid,
+      message : msg
+    }
+    console.log(msg);
+    const response =await fetch("http://localhost:3001/mail/send",{
+      method:"POST",
+      headers: {
+          "Content-Type" : "application/json" ,
+      },
+      body: JSON.stringify(obj)
+    })
+    if(response.ok){
+      alert('Mail Submitted');
+      this.setState({submitted:true});
+    }
+    else{
+
+      alert("Message failed to send.");
+  }
+}
+   
+  
   async handleToken(e) {
     e.preventDefault();
     let obj={
@@ -33,6 +62,9 @@ export class Booking extends React.Component {
         locationid: this.props.packageResp.touristid,
         traveldate: this.state.traveldate,
         noOfticket: this.state.totalmembers,
+        email: this.state.email,
+        message: this.state.message,
+        
 
     }
 
@@ -45,12 +77,14 @@ export class Booking extends React.Component {
         })
         console.log(response)
         if(response.ok) {
-            this.setState({submitted:true});
+            this.handlemail(obj.username,obj.email,obj.message);
+           
         }
         else
         {
             alert("Error");
         }
+    
   }
 
 
@@ -89,12 +123,39 @@ export class Booking extends React.Component {
               </div>
               <div className="col-75">
                 <input type="number" name="totalmembers" min="1" max="10" onChange={this.handleChange} />
+
+                
               </div>
             </div>
+
+            <h4>Feedback</h4>
+
+            <div className="row">
+              <div className="col-25">
+              <label for="email" >Email</label>
+              </div>
+              <div className="col-75">
+              <input type="email" className="form-control" name="email" onChange={this.handleChange} />
+              </div>
+                  
+              </div>
+              <div className="row">
+                <div className="col-25">
+                <label for="feedback">Message:</label>
+              </div>
+              <div className="col-75">
+                    <textarea className="form-control" rows="5" name="message" onChange={this.handleChange}></textarea>
+               </div>
+               </div>
+            
+
             <h4 style={{color:"red"}}>Total Amount : {this.props.packageResp.dailyCost * this.state.totalmembers} INR</h4>
             
+            
+            
+            
             <input type="submit" value="Click here"/> Make Payment
-           
+
             
             </form>
           </div>

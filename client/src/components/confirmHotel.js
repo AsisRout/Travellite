@@ -52,32 +52,7 @@ export class ConfirmHotel extends Component{
             alert("Error");
         }
 
-        /*console.log(token);
-        var name=this.props.hotelResp.hotel_name;
-        var amt=this.props.prc;
-        let obj={
-            product :{
-                name:name,
-                price:amt 
-            },
-            token:token           
-        }
-
-        const response=await fetch("http://localhost:8081/checkout",{
-        method:"POST",
-        headers: {
-            "Content-Type" : "application/json" ,
-        },
-        body: JSON.stringify(obj)
-        })
-        console.log(response)
-        if(response.ok) {
-            this.setState({redirectToThankyou:true})
-        }
-        else
-        {
-            alert("Error");
-        }*/
+     
     }
     render() {
         if(this.state.redirectToThankyou===true)

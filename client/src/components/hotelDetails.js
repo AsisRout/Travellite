@@ -82,27 +82,7 @@ export class HotelDetails extends React.Component {
       console.log(err);
     });
 
-    /*Maps*/
-
-    /*fetch(`https://apidojo-booking-v1.p.rapidapi.com/properties/get-static-map?currency_code=USD&languagecode=en-us&width=720&longitude=${this.props.hotelResp.longitude}&zoom=18&latitude=${this.props.hotelResp.latitude}&height=280`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "apidojo-booking-v1.p.rapidapi.com",
-        "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY
-      }
-    })
-    .then((res) => {console.log('resp of map :',res);
-    return res.json()})
-      .then((data) => {
-        console.log('img resp :',data);
-          var base64Flag = 'data:image/jpeg;base64,';
-          var imageStr =
-              this.arrayBufferToBase64(data.img.data.data);
-          this.setState({
-              map: base64Flag + imageStr
-          })
-      })
-      */
+  
   }
 
   

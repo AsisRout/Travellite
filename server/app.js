@@ -4,6 +4,7 @@ var path = require ('path');
 var cookieParser = require ('cookie-parser');
 var logger = require ('morgan');
 const session = require('express-session');
+var nodemailer = require('nodemailer');
 const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY);
 
 var cors = require('cors');
@@ -13,7 +14,8 @@ var router = express.Router();
 var indexRouter = require ('./routes/signup');
 var loginRouter = require ('./routes/login');
 var cityhotelsRouter = require ('./routes/cityhotels');
-var mysqlRouter = require('./config');
+var {mysqlRouter} = require('./config');
+var {creds} = require('./config');
 var usersRouter = require('./routes/users.js');
 var hoteldetailsRouter = require('./routes/hoteldetails');
 var adminRouter = require('./routes/admin');
@@ -21,9 +23,30 @@ var adminhotelRouter = require('./routes/adminhotel');
 var bookingRouter = require('./routes/bookings');
 var tourRouter = require('./routes/citytours');
 var adminTourRouter = require('./routes/admintour');
+var mailRouter =require('./routes/mail');
 
 global.db=mysqlRouter;
 
+var transport = {
+  host: 'smtp.gmail.com',
+  auth: {
+    user: creds.USER,
+    pass: creds.PASS
+  }
+
+}
+
+console.log(transport.auth);
+
+global.transporter = nodemailer.createTransport(transport)
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take messages');
+  }
+});
 
 var app = express ();
 
@@ -40,6 +63,8 @@ app.use(session({
      expires: 600000
   }
 }))
+
+
 
 app.use (cors ());
 app.use (logger ('dev'));
@@ -58,7 +83,7 @@ app.use ('/adminhotel',adminhotelRouter);
 app.use ('/bookings',bookingRouter);
 app.use ('/citytours',tourRouter);
 app.use ('/admintour',adminTourRouter);
-
+app.use ('/mail',mailRouter);
 app.use(session({
   key: "hotel",
   secret: "hotelsecret",

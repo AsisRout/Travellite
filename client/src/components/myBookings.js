@@ -22,32 +22,20 @@ export class MyBooking extends React.Component {
       this.setState({booking_history:json})
       let demo=JSON.stringify(json);
       console.log(json);
-      console.log(demo)
-     /* const res1= await fetch(`http://localhost:3001/bookings/tour/show?username=${encodeURIComponent(this.props.username)}`,{
-        method:"GET",
-        headers: {
-            "Content-Type" : "application/json"
-        }
-        })
-        let json1=await res1.json();
-        this.setState({tour_history:json1})
-        let demo1=JSON.stringify(json1);
-        console.log(json1);
-        console.log(demo1)
-      */ }
+      console.log(demo);
+     
+    }
     async fetchTourbookings()
     {
       const res= await fetch(`http://localhost:3001/bookings/tour/show?username=${encodeURIComponent(this.props.username)}`,{
       method:"GET",
       headers: {
           "Content-Type" : "application/json"
-      }
-      })
+      },
+      })  
       let json=await res.json();
-      this.setState({tour_history:json[0]})
-      let demo=JSON.stringify(json);
-      console.log(json[0]);
-      console.log(demo)
+      this.setState({tour_history:json[0]});
+ 
     }
   componentDidMount() {
     this.fetchBookings();
