@@ -6,8 +6,9 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
 <ul>
   <li>Login</li>
   <li>Search for Destination</li>
-  <li>Book the ticket</li>
-  <li>Use the tariff plans if given(discount)(<i>Still to be implemented</i>)</li>
+  <li>Search for Hotels</li>
+  <li>Book the ticket for both hotel and tour</li>
+  <li>Payment module</li>
   <li>Fill and edit personal details</li>
   <li>Hotel and tour booking</li>
   <li>Receive invoice(<i>Still to be implemented</i>)</li>
@@ -19,9 +20,8 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
   <li>Login</li>
   <li>Update information for member</li>
   <li>Update information for admin</li>
-  <li>Update city and destinations(<i>Still to be implemented</i>)</li>
-  <li>Print invoice(<i>Still to be implemented</i>)</li>
-  <li>Can check All data of complete site(<i>Still to be implemented</i>)</li>
+  <li>Update city and destinations</li>
+  <li>Can check All data of complete site</li>
   <li>Change of Password</li>
 </ul>
 
