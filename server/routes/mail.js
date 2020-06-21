@@ -12,7 +12,7 @@ Router.post ('/send', (req, res, next) => {
 
   var mail = {
     from: name,
-    to: 'email', //Change to email address that you want to receive messages on
+    to: 'asis.181it108@nitk.edu.in', //Change to email address that you want to receive messages on
     subject: 'New Feedback',
     text: content,
   };
