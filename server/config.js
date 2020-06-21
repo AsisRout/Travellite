@@ -16,8 +16,8 @@ mysqlRouter.connect (function (err) {
 });
 
 var creds = {
-  USER: 'asisrout7@gmail.com',
-  PASS: 'sanu@20058',
+  USER: 'USERNAME',
+  PASS: 'PASSWORD',
 };
 
 module.exports = {mysqlRouter, creds};
