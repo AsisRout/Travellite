@@ -17,8 +17,8 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
   <li>Login</li>
   <li>Update information for member</li>
   <li>Update information for admin</li>
-  <li>Update city and destinations(<i>Still to be implemented</i>)</li>
-  <li>Can check All data of complete site(<i>Still to be implemented</i>)</li>
+  <li>Update city and destinations</li>
+  <li>Can check All data of complete site</li>
 </ul>
 
 ## How to setup the project
