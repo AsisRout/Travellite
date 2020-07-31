@@ -6,14 +6,10 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
 <ul>
   <li>Login</li>
   <li>Search for Destination</li>
-  <li>Book the ticket</li>
-  <li>Use the tariff plans if given(discount)(<i>Still to be implemented</i>)</li>
+  <li>Book hotel and tour</li>
   <li>Fill and edit personal details</li>
   <li>Hotel booking</li>
-  <li>Nearby ATM search</li>
-  <li>Receive invoice(<i>Still to be implemented</i>)</li>
-  <li>Train ticket booking and searching of train</li>
-  <li>Change of password</li>
+  <li>Card Payment implemented using Stripe API</li>
 </ul>
 
 <h2>Functional Components for Admin</h2>
@@ -22,9 +18,7 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
   <li>Update information for member</li>
   <li>Update information for admin</li>
   <li>Update city and destinations(<i>Still to be implemented</i>)</li>
-  <li>Print invoice(<i>Still to be implemented</i>)</li>
   <li>Can check All data of complete site(<i>Still to be implemented</i>)</li>
-  <li>Change of Password</li>
 </ul>
 
 ## How to setup the project
@@ -51,8 +45,8 @@ $ npm install
 ```
 ### Contributer
 <ul>
-  <li> <a href="https://github.com/Akbhobhiya">Ashok Bhobhiya</a> </li>
-  <li><a href="https://github.com/AsisRout">Asis Rout</a> </li>
+  <li> <a href="https://github.com/Akbhobhiya">Asis Rout</a> </li>
+  <li><a href="https://github.com/AsisRout">Ashok Bhobhiya</a> </li>
   <li><a href="https://github.com/Jeeukrishnan">Jeeukrishnan Kashyap </a> </li>
 </ul>
 <br>
