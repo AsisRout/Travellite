@@ -1,6 +1,6 @@
-# Smart-Tourism-Guide WebApplication
+# Travellite
 
-This is the Smart Tourism Guide website made for the WTA project. We've used Node.JS ,express and MySQL for backend and html,css and js for frontend. All the ER Diagrams have been normalised upto 3NF, and a simple User Interface has been implemented.
+This is the Tourism Guide website made for the WTA project. We've used Node.JS ,express and MySQL for backend and html,css and js for frontend. All the ER Diagrams have been normalised upto 3NF, and a simple User Interface has been implemented.
 
 <h2>Functional Components of the Customer</h2>
 <ul>
